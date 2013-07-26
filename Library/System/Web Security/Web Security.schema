@@ -1,0 +1,5555 @@
+"Schema definition file 2.0"
+
+#(
+	#{Miosoft.Schema}
+	"Last saved:"  3524829142870  "= September 11, 2012 15:12:22.870"
+
+	"Classes" 
+		(
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.AccessPredicate' false false '' -1 0)
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.AccessRole' true false '' -1 5)
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.AccessRule' true false '' -1 5)
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.PasswordPolicy' true false '' -1 1)
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.User' true false '' -1 5)
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.WebEvent' true true '' -1 7)
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.WebLogin' true false '' -1 5)
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.WebLoginAttemptFailure' true false '' -1 5)
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.WebLogout' true false '' -1 5)
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.WebPageDrill' true false '' -1 5)
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.WebPageEvent' true true '' -1 7)
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.WebPageFailure' true false '' -1 5)
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.WebPageFormValue' false false '' -1 0)
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.WebPageSearch' true false '' -1 5)
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.WebPageWrite' true false '' -1 5)
+		(#{Miosoft.SchemaClass} 'MiosoftWebSecurity.WebSecurityError' true false '' -1 5))
+
+	"Class inheritance" 
+		(
+		('MiosoftWebSecurity.AccessPredicate' nil)
+		('MiosoftWebSecurity.AccessRole' nil)
+		('MiosoftWebSecurity.AccessRule' nil)
+		('MiosoftWebSecurity.PasswordPolicy' nil)
+		('MiosoftWebSecurity.User' nil)
+		('MiosoftWebSecurity.WebEvent' nil)
+		('MiosoftWebSecurity.WebLogin' 'MiosoftWebSecurity.WebEvent')
+		('MiosoftWebSecurity.WebLoginAttemptFailure' 'MiosoftWebSecurity.WebEvent')
+		('MiosoftWebSecurity.WebLogout' 'MiosoftWebSecurity.WebEvent')
+		('MiosoftWebSecurity.WebPageDrill' 'MiosoftWebSecurity.WebPageEvent')
+		('MiosoftWebSecurity.WebPageEvent' 'MiosoftWebSecurity.WebEvent')
+		('MiosoftWebSecurity.WebPageFailure' 'MiosoftWebSecurity.WebPageEvent')
+		('MiosoftWebSecurity.WebPageFormValue' nil)
+		('MiosoftWebSecurity.WebPageSearch' 'MiosoftWebSecurity.WebPageEvent')
+		('MiosoftWebSecurity.WebPageWrite' 'MiosoftWebSecurity.WebPageEvent')
+		('MiosoftWebSecurity.WebSecurityError' 'MiosoftWebSecurity.WebEvent'))
+
+	"Attributes" 
+		(
+		(
+			'MiosoftWebSecurity.AccessPredicate'
+			(
+				#{Miosoft.SchemaAttribute}
+				#expression
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.SchemaAttribute}
+				#all
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} '''all''')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.SchemaAttribute}
+				#fragmentForEditing
+				'MiosoftWebSecurity.AccessRole'
+				1
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'| original copy |
+original := self asFragment.
+copy := AccessRole fragmentClass new.
+copy
+	timestamp: Timestamp now;
+	roleName: self roleName;
+	webRuleKeys: original _accessRules_ruleName.
+copy
+')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				true
+				false))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.SchemaAttribute}
+				#fragmentForNewRole
+				'MiosoftWebSecurity.AccessRole'
+				1
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} 'MiosoftWebSecurity.AccessRole fragmentClass new
+	clearRoleName;
+	timestamp: Timestamp now;
+	yourself.')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				true
+				false))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.SchemaAttribute}
+				#pickString
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'self roleName, '' (rules: '',
+	((self userRole_Permission_Roles collect: [:r |
+			r accessRule_ruleName]
+		) concatenatedStringsSeparatedBy: '', ''),
+	'')''')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.SchemaAttribute}
+				#roleName
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.SchemaAttribute}
+				#rule
+				'MiosoftWebSecurity.AccessRule'
+				2
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} 'MiosoftWebSecurity.AccessRule_allIndex scanPredicate: ''all="all"''')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				true))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.SchemaAttribute}
+				#timestamp
+				(#{Miosoft.SmalltalkTimestamp})
+				1
+				false
+				''
+				''
+				'yyyy-mm-dd hh:mm:ss.fff'
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.SchemaAttribute}
+				#user
+				'MiosoftWebSecurity.User'
+				1
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} '(MiosoftWebSecurity.User_login scanPredicate: ''loginName= "'',
+Miosoft.MioconWebSession loggedInUser,''"'') any')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				true))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.SchemaAttribute}
+				#webRule
+				'MiosoftWebSecurity.AccessRule'
+				2
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.ConstrainedComputationPolicy})
+				''
+				(#rule)
+				('[MiosoftWebSecurity::AccessRole]webRuleKey')
+				('[MiosoftWebSecurity::AccessRule]ruleName')
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.SchemaAttribute}
+				#webRuleKey
+				(#{Miosoft.SmalltalkString})
+				2
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#affectsCreation
+				(#{Miosoft.SmalltalkBoolean})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#affectsDeletion
+				(#{Miosoft.SmalltalkBoolean})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#affectsRead
+				(#{Miosoft.SmalltalkBoolean})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#affectsUpdate
+				(#{Miosoft.SmalltalkBoolean})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#all
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} '''all''')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#description
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#featureName
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#fragmentForEditing
+				'MiosoftWebSecurity.AccessRule'
+				1
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} 'self asFragment copy
+	timestamp: Timestamp now;
+	yourself.
+')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				true
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#fragmentForNewRule
+				'MiosoftWebSecurity.AccessRule'
+				1
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'MiosoftWebSecurity.AccessRule fragmentClass new
+	affectsCreation: false;
+	affectsDeletion: false;
+	affectsRead: true;
+	affectsUpdate: false;
+	grantOrDeny: ''Grant'';
+	kindOfFeature: ''Application'';
+	clearRuleName;
+	predicate: (MiosoftWebSecurity.AccessPredicate fragmentClass new expression: ''true'');
+	priority: 1;
+	timestamp: Timestamp now;
+	yourself.')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				true
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#grantOrDeny
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				'Grant
+Deny'
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#kindOfFeature
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				'Application
+Class
+Path Component
+WebService'
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#pickString
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'self description,
+	'' ('',
+	self grantOrDeny,
+	'', '',
+	self kindOfFeature, ''='', self featureName,
+	''['',
+	(self affectsCreation == true ifTrue: [''C''] ifFalse: ['''']),
+	(self affectsRead == true ifTrue: [''R''] ifFalse: ['''']),
+	(self affectsUpdate == true ifTrue: [''U''] ifFalse: ['''']),
+	(self affectsDeletion == true ifTrue: [''D''] ifFalse: ['''']),
+	''])''')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#predicate
+				'MiosoftWebSecurity.AccessPredicate'
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#priority
+				(#{Miosoft.SmalltalkInteger})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#ruleName
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#timestamp
+				(#{Miosoft.SmalltalkTimestamp})
+				1
+				false
+				''
+				''
+				'yyyy-mm-dd hh:mm:ss.fff'
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.SchemaAttribute}
+				#user
+				'MiosoftWebSecurity.User'
+				1
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} '(MiosoftWebSecurity.User_login scanPredicate: ''loginName= "'',
+Miosoft.MioconWebSession loggedInUser,''"'') any')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.PasswordPolicy'
+			(
+				#{Miosoft.SchemaAttribute}
+				#allowedTimeBetweenFailedLogins
+				(#{Miosoft.SmalltalkInteger})
+				1
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'"Obtain the time (in milliseconds) allowed between two logins before they are no
+longer considered consecutive.
+
+Return nil to disable this mechanism. Note that use of this mechanism will enable
+trivial denial of service attacks, as parties who know a valid user name will be
+able to lock out valid parties without any additional information or any special
+privileges.
+
+If this method returns a non-nil value, then ''maximumFailedLogins'' must also
+return a non-nil value.
+
+This method is well-known to the Miocon engine and *must* be present."
+
+60000')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.PasswordPolicy'
+			(
+				#{Miosoft.SchemaAttribute}
+				#checkExpiration
+				(#{Miosoft.SmalltalkBoolean})
+				1
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'"Check the expiration of the user''s password. Return true if the password
+has expired, return false otherwise.
+
+This method is well-known to the Miocon engine and *must* be present."
+
+^ user lastPasswordChange isExtendedNull
+	ifFalse: [
+		Date today asDays > (user lastPasswordChange asDate asDays + self passwordDuration) ]
+	ifTrue: [
+		"This case provides support for bootstrapping."
+		false ]')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.PasswordPolicy'
+			(
+				#{Miosoft.SchemaAttribute}
+				#checkPassword
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'"Obtain a string containing JavaScript which may be executed by the client
+to validate  the strength of a candidate password. The script exports two
+objects, a StringBuffer class and a checkPassword() function. The exported
+function accepts a candidate password in clear text and a StringBuffer into
+which an error message related to password invalidity may be written. The
+return value of the function is a Boolean: true if the candidate password is
+sufficiently strong, false otherwise.
+
+This mechanism allows a customer to customize the password checker
+without requiring that the client ever transmit the clear-text password over
+the network. It is therefore inside-out from the usual expectations.
+
+This method is well-known to the Miocon engine and *must* be present."
+
+''
+MioWeb.StringBuffer = function () {
+	this.buffer = [];
+};
+
+MioWeb.StringBuffer.prototype = {
+	append: function (s) {
+		this.buffer[this.buffer.length] = s;
+		return this;
+	},
+
+	toString: function() {
+		return this.buffer.join("");
+	}
+};
+
+MioWeb.checkPassword = function(candidatePassword, failureMessageHolder)
+{
+	var status = true;
+	var failure = new MioWeb.StringBuffer();
+	failure.append("Password invalid. Reasons are given below:\n\n");
+
+	// Enforce minimum password length.
+	if (candidatePassword.length %< <1p>)
+	{
+		failure.append("* Password must be at least <1p> characters in length.\n");
+		status = false;
+	}
+
+	// Enforce maximum password length.
+	if (candidatePassword.length > <2p>)
+	{
+		failure.append("* Password must be at most <2p> characters in length.\n");
+		status = false;
+	}
+
+	var predicatesAndClasses =
+	[
+		[ function (c) { return (c >= "0") && (c %<= "9"); }, "digit" ],
+		[ function (c)
+	 	  {
+			return (c >= "\u0020") && (c %<= "\u007e") && !(
+				((c >= "0") && (c %<= "9")) || ((c >= "A") && (c %<= "Z")) || ((c >= "a") && (c %<= "z")));
+		  }, "nonalphanumeric symbol" ],
+		[ function (c) { return (c >= "A") && (c %<= "Z"); }, "uppercase letter" ],
+		[ function (c) { return (c >= "a") && (c %<= "z"); }, "lowercase letter" ]
+	];
+
+	var anySatisfy = function (s, f)
+	{
+		for (var i = 0; i %< s.length; i++)
+		{
+			if (f(s.charAt(i)))
+			{
+				return true;
+			}
+		}
+		return false;
+	};
+
+	var allCharacterClasses = function ()
+	{
+		var classes = [];
+		for (var i = 0; i %< predicatesAndClasses.length; i++)
+		{
+			var assoc = predicatesAndClasses[i];
+			classes[classes.length] = assoc[1];
+		}
+		return classes.join(", ");
+	};
+
+	// Verify that the password contains at least one digit, nonalphanumeric symbol, uppercase letter, and
+	// lowercase letter.
+	for (var i = 0; i %< predicatesAndClasses.length; i++)
+	{
+		var assoc = predicatesAndClasses[i];
+		if (!anySatisfy(candidatePassword, assoc[0]))
+		{
+			failure.append("* Password must contain at least one " + assoc[1] + ".\n");
+			status = false;
+		}
+	}
+
+	// Verify that the password does not sequence more than five elements within a given character class."
+	var previousPredicate = null;
+	var repeatCount = 0;
+	for (var i = 0; i %< candidatePassword.length; i++)
+	{
+		for (var j = 0; j %< predicatesAndClasses.length; j++)
+		{
+			var assoc = predicatesAndClasses[j];
+			if (assoc[0](candidatePassword.charAt(i)))
+			{
+				if (previousPredicate == assoc[0])
+				{
+					repeatCount++;
+					if (repeatCount == 6)
+					{
+						failure.append("* Password must not sequentially repeat an element of a character class (" + allCharacterClasses() + ") more than five times.\n");
+						status = false;
+					}
+				}
+				else
+				{
+					previousPredicate = assoc[0];
+					repeatCount = 1;
+				}
+			}
+		}
+	}
+
+	if (!status)
+	{
+		failureMessageHolder.append(failure.toString());
+	}
+
+	return status;
+};
+''
+	expandMacrosWith: self minimumPasswordLength
+	with: self maximumPasswordLength
+')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.PasswordPolicy'
+			(
+				#{Miosoft.SchemaAttribute}
+				#maximumFailedLogins
+				(#{Miosoft.SmalltalkInteger})
+				1
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'"Obtain the number of consecutive failed logins which are permitted before the
+target user account is automatically disabled.
+
+Return nil to disable this mechanism. Note that use of this mechanism will enable
+trivial denial of service attacks, as parties who know a valid user name will be
+able to lock out valid parties without any additional information or any special
+privileges.
+
+If this method returns a non-nil value, then ''allowedTimeBetweenFailedLogins''
+must also return a non-nil value.
+
+This method is well-known to the Miocon engine and *must* be present."
+
+3')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.PasswordPolicy'
+			(
+				#{Miosoft.SchemaAttribute}
+				#maximumPasswordLength
+				(#{Miosoft.SmalltalkInteger})
+				1
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} '"Return the maximum length of a password in characters."
+
+60')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.PasswordPolicy'
+			(
+				#{Miosoft.SchemaAttribute}
+				#minimumPasswordLength
+				(#{Miosoft.SmalltalkInteger})
+				1
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} '"Return the minimum length of a password in characters."
+
+12')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.PasswordPolicy'
+			(
+				#{Miosoft.SchemaAttribute}
+				#newPreviousPassword
+				(#{Miosoft.SmalltalkString})
+				2
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'"Determine the composition of the user''s previous password registry.
+The ''user'' attribute will be defined when this method is invoked. This
+method runs after the user''s ''password'' has been updated to reflect a
+password change. Return a new Many to be plugged into ''previousPasswords''
+by the Miocon engine.
+
+The system implementation simply appends these values to the user''s
+''previousPasswords''. A customer may control the password uniqueness
+policy by replacing this method.
+
+This method is well-known to the Miocon engine and *must* be present."
+
+| previousPasswords |
+
+previousPasswords := user previousPasswords copyWith: user password.
+
+^ previousPasswords')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.PasswordPolicy'
+			(
+				#{Miosoft.SchemaAttribute}
+				#passwordDuration
+				(#{Miosoft.SmalltalkInteger})
+				1
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} '"Return the number of days until a user''s password expires."
+
+90')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.PasswordPolicy'
+			(
+				#{Miosoft.SchemaAttribute}
+				#user
+				'MiosoftWebSecurity.User'
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				true
+				false
+				true))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#active
+				(#{Miosoft.SmalltalkBoolean})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#currentTime
+				(#{Miosoft.SmalltalkTimestamp})
+				1
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} 'Timestamp now')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#fragmentForEditing
+				'MiosoftWebSecurity.User'
+				1
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'| original copy |
+original := self asFragment.
+copy := User fragmentClass new.
+copy
+	active: original active;
+	fragmentPurpose: '''';
+	lastPasswordChange: original lastPasswordChange;
+	loginName: original loginName;
+	password: original password;
+	previousPasswords: original previousPasswords;
+	timestamp: Timestamp now;
+	webRoleKeys: original _roles_roleName;
+	clearWebMessage.
+copy
+')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				true
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#fragmentForNewRole
+				'MiosoftWebSecurity.AccessRole'
+				1
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} 'MiosoftWebSecurity.AccessRole fragmentClass new
+	clearRoleName;
+	timestamp: Timestamp now;
+	yourself.')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				true
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#fragmentForNewRule
+				'MiosoftWebSecurity.AccessRule'
+				1
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'MiosoftWebSecurity.AccessRule fragmentClass new
+	affectsCreation: false;
+	affectsDeletion: false;
+	affectsRead: true;
+	affectsUpdate: false;
+	grantOrDeny: ''Grant'';
+	kindOfFeature: ''Application'';
+	clearRuleName;
+	predicate: (MiosoftWebSecurity.AccessPredicate fragmentClass new expression: ''true'');
+	priority: 1;
+	timestamp: Timestamp now;
+	yourself.')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				true
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#fragmentForNewUser
+				'MiosoftWebSecurity.User'
+				1
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'"Creates a new user.  If password expiration is enabled, a password change will be required at the first log in attempt.
+
+The value of defaultPassword is customizable. "
+
+| defaultPassword hash prev |
+
+defaultPassword := ''password''.
+
+hash := (Miosoft.Cryptography bytesAsHex: (Miosoft.Cryptography computeSHA512: defaultPassword asByteArray)).
+prev := Many new.
+prev addElement: hash.
+
+MiosoftWebSecurity.User fragmentClass new
+	active: true;
+	lastPasswordChange: 
+		(Timestamp fromIsoFormatStandardString: (Timestamp new formatISOStandardPlusMilliseconds));
+	clearLoginName;
+	password: hash;
+	previousPasswords: prev;
+	timestamp: Timestamp now;
+	yourself.')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				true
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#fragmentPurpose
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				'
+password change
+activation change'
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#incompleteRoleMessage
+				(#{Miosoft.SmalltalkString})
+				2
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'| result updatedRoles existingRoles |
+
+result := Many new.
+updatedRoles := (self localRoles collect: [ :role | role role_roleName]) asMany.
+existingRoles := self _roles_roleName.
+
+(existingRoles equalAndNotNull: updatedRoles)
+	ifFalse: [
+		result := updatedRoles reject: [ :uRole | existingRoles anyEqual: uRole].
+		result := result copyWith: ''Roles still processing. Please refresh to update display.'' ].
+^ result')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#lastPasswordChange
+				(#{Miosoft.SmalltalkTimestamp})
+				1
+				false
+				''
+				''
+				'yyyy-mm-dd hh:mm:ss.fff'
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#loginName
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#password
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#pickString
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} 'self loginName, (self active == true ifTrue: [''''] ifFalse: ['' (inactive)''])')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#previousPassword
+				(#{Miosoft.SmalltalkString})
+				2
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#resetPassword
+				(#{Miosoft.SmalltalkBoolean})
+				1
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'"Initializes and expires a user''s password.  If password expiration is enabled, a password change will be required at the next log in attempt.
+
+The value of defaultPassword is customizable. "
+
+| defaultPassword |
+
+defaultPassword := ''password''.
+
+self 
+	password: (Miosoft.Cryptography bytesAsHex: (Miosoft.Cryptography computeSHA512: defaultPassword asByteArray));
+	lastPasswordChange: (Timestamp fromIsoFormatStandardString: (Timestamp new formatISOStandardPlusMilliseconds));
+	loginName: self loginName;
+	webMessage: ''Accept to store.''.
+^ false')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#role
+				'MiosoftWebSecurity.AccessRole'
+				2
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} 'MiosoftWebSecurity.AccessRole_allIndex scanPredicate: ''all="all"''')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				true))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#rule
+				'MiosoftWebSecurity.AccessRule'
+				2
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} 'MiosoftWebSecurity.AccessRule_allIndex scanPredicate: ''all="all"''')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				true))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#timestamp
+				(#{Miosoft.SmalltalkTimestamp})
+				1
+				false
+				''
+				''
+				'yyyy-mm-dd hh:mm:ss.fff'
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#webMessage
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				true
+				false
+				false))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#webRole
+				'MiosoftWebSecurity.AccessRole'
+				2
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.ConstrainedComputationPolicy})
+				''
+				(#role)
+				('[MiosoftWebSecurity::User]webRoleKey')
+				('[MiosoftWebSecurity::AccessRole]roleName')
+				true
+				false
+				false
+				true))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.SchemaAttribute}
+				#webRoleKey
+				(#{Miosoft.SmalltalkString})
+				2
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebEvent'
+			(
+				#{Miosoft.SchemaAttribute}
+				#application
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebEvent'
+			(
+				#{Miosoft.SchemaAttribute}
+				#field
+				(#{Miosoft.SmalltalkString})
+				2
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebEvent'
+			(
+				#{Miosoft.SchemaAttribute}
+				#ipAddress
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebEvent'
+			(
+				#{Miosoft.SchemaAttribute}
+				#sessionId
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebEvent'
+			(
+				#{Miosoft.SchemaAttribute}
+				#timestamp
+				(#{Miosoft.SmalltalkTimestamp})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebEvent'
+			(
+				#{Miosoft.SchemaAttribute}
+				#url
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebEvent'
+			(
+				#{Miosoft.SchemaAttribute}
+				#username
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebEvent'
+			(
+				#{Miosoft.SchemaAttribute}
+				#webServer
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebLoginAttemptFailure'
+			(
+				#{Miosoft.SchemaAttribute}
+				#failure
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebLogout'
+			(
+				#{Miosoft.SchemaAttribute}
+				#timedOut
+				(#{Miosoft.SmalltalkBoolean})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebPageEvent'
+			(
+				#{Miosoft.SchemaAttribute}
+				#formData
+				'MiosoftWebSecurity.WebPageFormValue'
+				2
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebPageEvent'
+			(
+				#{Miosoft.SchemaAttribute}
+				#linkText
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebPageFailure'
+			(
+				#{Miosoft.SchemaAttribute}
+				#description
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebPageFailure'
+			(
+				#{Miosoft.SchemaAttribute}
+				#stackTrace
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebPageFormValue'
+			(
+				#{Miosoft.SchemaAttribute}
+				#description
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebPageFormValue'
+			(
+				#{Miosoft.SchemaAttribute}
+				#key
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebPageFormValue'
+			(
+				#{Miosoft.SchemaAttribute}
+				#reportKey
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} '[
+	| words |
+	words := self key asKeywords.
+	words isEmpty ifTrue: [''''] ifFalse: [words last]
+] value')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebPageFormValue'
+			(
+				#{Miosoft.SchemaAttribute}
+				#value
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebSecurityError'
+			(
+				#{Miosoft.SchemaAttribute}
+				#description
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'MiosoftWebSecurity.WebSecurityError'
+			(
+				#{Miosoft.SchemaAttribute}
+				#parameterString
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false)))
+
+	"Class Indices" 
+		(
+		('MiosoftWebSecurity.AccessRole' #objectIndex (#{Miosoft.ParallelIndex} 'allIndex' 0 ((#all)) ((#all)) () 'ignored'))
+		('MiosoftWebSecurity.AccessRole' #objectIndex (#{Miosoft.ParallelIndex} 'byName' 0 ((#roleName)) ((#roleName)) () 'ignored'))
+		('MiosoftWebSecurity.AccessRole' #objectIndex (#{Miosoft.ParallelIndex} 'fragByName' 2 ((#roleName)) ((#roleName)) () 'ignored'))
+		('MiosoftWebSecurity.AccessRule' #objectIndex (#{Miosoft.ParallelIndex} 'allIndex' 0 ((#all)) ((#all)) () 'ignored'))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			#objectIndex
+			(
+				#{Miosoft.ParallelIndex}
+				'byKeyword'
+				0
+				((#description) (#grantOrDeny) (#affectsDeletion) (#affectsCreation) (#affectsRead) (#affectsUpdate) (#description 'keywordsAll') (#priority))
+				((#description 'keywordsAll'))
+				((#description 'keywordsAll'))
+				'ignored'))
+		('MiosoftWebSecurity.AccessRule' #objectIndex (#{Miosoft.ParallelIndex} 'fragByName' 2 ((#ruleName)) ((#ruleName)) () 'ignored'))
+		('MiosoftWebSecurity.User' #objectIndex (#{Miosoft.ParallelIndex} 'fragByLogin' 2 ((#loginName)) ((#loginName)) () 'ignored'))
+		('MiosoftWebSecurity.User' #objectIndex (#{Miosoft.ParallelIndex} 'login' 0 ((#password) (#loginName) (#active)) ((#loginName)) () 'ignored')))
+
+	"Root classes" 
+		(
+		'MiosoftWebSecurity.AccessRole'
+		'MiosoftWebSecurity.User'
+		'MiosoftWebSecurity.AccessRule'
+		'MiosoftWebSecurity.WebEvent'
+		'MiosoftWebSecurity.WebLogin'
+		'MiosoftWebSecurity.WebPageEvent'
+		'MiosoftWebSecurity.WebPageSearch'
+		'MiosoftWebSecurity.WebPageWrite'
+		'MiosoftWebSecurity.WebLogout'
+		'MiosoftWebSecurity.WebPageDrill'
+		'MiosoftWebSecurity.WebPageFailure'
+		'MiosoftWebSecurity.WebLoginAttemptFailure'
+		'MiosoftWebSecurity.WebSecurityError')
+
+	"Relationships" 
+		(
+		(
+			#{Miosoft.SchemaRelationship}
+			'Permission'
+			(
+				(#{Miosoft.SchemaRole} 'accessRule' 'MiosoftWebSecurity.AccessRule' ((#description) (#ruleName)) ((#description) (#ruleName)) 2 true)
+				(#{Miosoft.SchemaRole} 'userRole' 'MiosoftWebSecurity.AccessRole' ((#roleName)) ((#roleName)) 2 false))
+			()
+			nil
+			())
+		(
+			#{Miosoft.SchemaRelationship}
+			'UserRole'
+			(
+				(#{Miosoft.SchemaRole} 'role' 'MiosoftWebSecurity.AccessRole' ((#roleName)) ((#roleName)) 2 true)
+				(#{Miosoft.SchemaRole} 'user' 'MiosoftWebSecurity.User' ((#loginName)) ((#loginName)) 2 false))
+			()
+			nil
+			()))
+
+	"Match Rules" 
+		(
+		(
+			#{Miosoft.ClassMatchComparison}
+			'matchRole'
+			'MiosoftWebSecurity.AccessRole'
+			((#{Miosoft.MatchClause} 'by Name' ((#{Miosoft.AttributeMatchComparison} #roleName (#{Miosoft.EqualMatchComparison}) false false))))
+			true)
+		(
+			#{Miosoft.ClassMatchComparison}
+			'matchRule'
+			'MiosoftWebSecurity.AccessRule'
+			((#{Miosoft.MatchClause} 'by name' ((#{Miosoft.AttributeMatchComparison} #ruleName (#{Miosoft.EqualMatchComparison}) false false))))
+			true)
+		(
+			#{Miosoft.ClassMatchComparison}
+			'matchUser'
+			'MiosoftWebSecurity.User'
+			((#{Miosoft.MatchClause} 'by name' ((#{Miosoft.AttributeMatchComparison} #loginName (#{Miosoft.EqualMatchComparison}) false false))))
+			true))
+
+	"Merge Rules" 
+		(
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.MergeRule}
+				(
+					(
+						#{Miosoft.TupleDefinition}
+						'AccessRole Fragments'
+						(#{Miosoft.PlainTuplePolicy} false false true)
+						()
+						((#{Miosoft.TupleElement} 'accessRole' (#{Miosoft.InitialInputSource}) nil nil 'MiosoftWebSecurity.AccessRole' ()))
+						())
+					(
+						#{Miosoft.TupleDefinition}
+						'select MiosoftWebSecurity.AccessRole fragments'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(1)
+						(
+							(#{Miosoft.TupleElement} 'MiosoftWebSecurity.AccessRole' (#{Miosoft.ElementSource} 1 1) nil nil 'MiosoftWebSecurity.AccessRole' ())
+							(#{Miosoft.TupleElement} 'timestamp' (#{Miosoft.ElementPathSource} 1 1 (#timestamp)) nil nil #timestamp ())
+							(#{Miosoft.TupleElement} 'null timestamp' (#{Miosoft.ConstantSource} '') nil nil #timestamp ()))
+						((#{Miosoft.MaxFilter} () (#{Miosoft.ElementSource} 2 2) false) (#{Miosoft.ArbitraryFilter} (1))))
+					(
+						#{Miosoft.TupleDefinition}
+						'new MiosoftWebSecurity.AccessRole'
+						(#{Miosoft.PlainTuplePolicy} false true false)
+						(4 5 7)
+						(
+							(
+								#{Miosoft.TupleElement}
+								'new MiosoftWebSecurity.AccessRole'
+								(#{Miosoft.NewInstanceSource})
+								nil
+								nil
+								'MiosoftWebSecurity.AccessRole'
+								(
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #roleName 'MiosoftWebSecurity.AccessRole')) (#{Miosoft.ElementSource} 4 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #timestamp 'MiosoftWebSecurity.AccessRole')) (#{Miosoft.ElementSource} 5 1))
+									(
+										#{Miosoft.InstanceUpdater}
+										((#SchemaSourceRolePathComponent 'userRole_Permission_Role' 'MiosoftWebSecurity.AccessRole'))
+										(#{Miosoft.ElementSource} 7 1)))))
+						())
+					(
+						#{Miosoft.TupleDefinition}
+						'roleName'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						((#{Miosoft.TupleElement} 'roleName' (#{Miosoft.ElementPathSource} 2 1 (#roleName)) nil nil #string ()))
+						(
+							(#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 4 1) 1)
+							(#{Miosoft.MaxFilter} (1) (#{Miosoft.ElementSource} 4 1) false)
+							(#{Miosoft.ArbitraryFilter} (2))))
+					(
+						#{Miosoft.TupleDefinition}
+						'timestamp'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						((#{Miosoft.TupleElement} 'timestamp' (#{Miosoft.ElementPathSource} 2 1 (#timestamp)) nil nil #timestamp ()))
+						(
+							(#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 5 1) 1)
+							(#{Miosoft.MaxFilter} (1) (#{Miosoft.ElementSource} 5 1) false)
+							(#{Miosoft.ArbitraryFilter} (2))))
+					(
+						#{Miosoft.TupleDefinition}
+						'Extract Rule Relationships'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						(
+							(
+								#{Miosoft.TupleElement}
+								'AccessRule'
+								(#{Miosoft.NewInstanceSource})
+								nil
+								nil
+								'MiosoftWebSecurity.AccessRule'
+								(
+									(
+										#{Miosoft.InstanceUpdater}
+										((#SchemaAttributePathComponent #ruleName 'MiosoftWebSecurity.AccessRule'))
+										(#{Miosoft.ElementPathSource} 2 1 (#webRuleKey)))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #timestamp 'MiosoftWebSecurity.AccessRule')) (#{Miosoft.ElementSource} 2 3)))))
+						())
+					(
+						#{Miosoft.TupleDefinition}
+						'Build Rule Relationships'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(6)
+						(
+							(
+								#{Miosoft.TupleElement}
+								'userRole'
+								(#{Miosoft.NewRelationshipSource} (nil))
+								nil
+								nil
+								('MiosoftWebSecurity.AccessRole' 'userRole' 'Permission')
+								((#{Miosoft.InstanceUpdater} ((#SchemaTargetRolePathComponent 'userRole_Permission_accessRule')) (#{Miosoft.ElementSource} 6 1)))))
+						()))))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.MergeRule}
+				(
+					(
+						#{Miosoft.TupleDefinition}
+						'AccessRule Fragments'
+						(#{Miosoft.PlainTuplePolicy} false false true)
+						()
+						((#{Miosoft.TupleElement} 'accessRule' (#{Miosoft.InitialInputSource}) nil nil 'MiosoftWebSecurity.AccessRule' ()))
+						())
+					(
+						#{Miosoft.TupleDefinition}
+						'select MiosoftWebSecurity.AccessRule fragments'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(1)
+						(
+							(#{Miosoft.TupleElement} 'MiosoftWebSecurity.AccessRule' (#{Miosoft.ElementSource} 1 1) nil nil 'MiosoftWebSecurity.AccessRule' ())
+							(#{Miosoft.TupleElement} 'timestamp' (#{Miosoft.ElementPathSource} 1 1 (#timestamp)) nil nil #timestamp ()))
+						((#{Miosoft.MaxFilter} () (#{Miosoft.ElementSource} 2 2) false) (#{Miosoft.ArbitraryFilter} (1))))
+					(
+						#{Miosoft.TupleDefinition}
+						'new MiosoftWebSecurity.AccessRule'
+						(#{Miosoft.PlainTuplePolicy} false true false)
+						(4 5 6 7 8 9 10 11 12 13 14 15)
+						(
+							(
+								#{Miosoft.TupleElement}
+								'new MiosoftWebSecurity.AccessRule'
+								(#{Miosoft.NewInstanceSource})
+								nil
+								nil
+								'MiosoftWebSecurity.AccessRule'
+								(
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #affectsCreation 'MiosoftWebSecurity.AccessRule')) (#{Miosoft.ElementSource} 4 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #affectsDeletion 'MiosoftWebSecurity.AccessRule')) (#{Miosoft.ElementSource} 5 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #affectsRead 'MiosoftWebSecurity.AccessRule')) (#{Miosoft.ElementSource} 6 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #affectsUpdate 'MiosoftWebSecurity.AccessRule')) (#{Miosoft.ElementSource} 7 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #description 'MiosoftWebSecurity.AccessRule')) (#{Miosoft.ElementSource} 8 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #featureName 'MiosoftWebSecurity.AccessRule')) (#{Miosoft.ElementSource} 9 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #grantOrDeny 'MiosoftWebSecurity.AccessRule')) (#{Miosoft.ElementSource} 10 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #kindOfFeature 'MiosoftWebSecurity.AccessRule')) (#{Miosoft.ElementSource} 11 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #predicate 'MiosoftWebSecurity.AccessRule')) (#{Miosoft.ElementSource} 12 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #priority 'MiosoftWebSecurity.AccessRule')) (#{Miosoft.ElementSource} 13 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #timestamp 'MiosoftWebSecurity.AccessRule')) (#{Miosoft.ElementSource} 14 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #ruleName 'MiosoftWebSecurity.AccessRule')) (#{Miosoft.ElementSource} 15 1)))))
+						())
+					(
+						#{Miosoft.TupleDefinition}
+						'affectsCreation'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						((#{Miosoft.TupleElement} 'affectsCreation' (#{Miosoft.ElementPathSource} 2 1 (#affectsCreation)) nil nil #bool ()))
+						((#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 4 1) 1) (#{Miosoft.ArbitraryFilter} (1))))
+					(
+						#{Miosoft.TupleDefinition}
+						'affectsDeletion'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						((#{Miosoft.TupleElement} 'affectsDeletion' (#{Miosoft.ElementPathSource} 2 1 (#affectsDeletion)) nil nil #bool ()))
+						((#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 5 1) 1) (#{Miosoft.ArbitraryFilter} (1))))
+					(
+						#{Miosoft.TupleDefinition}
+						'affectsRead'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						((#{Miosoft.TupleElement} 'affectsRead' (#{Miosoft.ElementPathSource} 2 1 (#affectsRead)) nil nil #bool ()))
+						((#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 6 1) 1) (#{Miosoft.ArbitraryFilter} (1))))
+					(
+						#{Miosoft.TupleDefinition}
+						'affectsUpdate'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						((#{Miosoft.TupleElement} 'affectsUpdate' (#{Miosoft.ElementPathSource} 2 1 (#affectsUpdate)) nil nil #bool ()))
+						((#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 7 1) 1) (#{Miosoft.ArbitraryFilter} (1))))
+					(
+						#{Miosoft.TupleDefinition}
+						'description'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						((#{Miosoft.TupleElement} 'description' (#{Miosoft.ElementPathSource} 2 1 (#description)) nil nil #string ()))
+						(
+							(#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 8 1) 1)
+							(#{Miosoft.MaxFilter} (1) (#{Miosoft.ElementSource} 8 1) false)
+							(#{Miosoft.ArbitraryFilter} (2))))
+					(
+						#{Miosoft.TupleDefinition}
+						'featureName'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						((#{Miosoft.TupleElement} 'featureName' (#{Miosoft.ElementPathSource} 2 1 (#featureName)) nil nil #string ()))
+						(
+							(#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 9 1) 1)
+							(#{Miosoft.MaxFilter} (1) (#{Miosoft.ElementSource} 9 1) false)
+							(#{Miosoft.ArbitraryFilter} (2))))
+					(
+						#{Miosoft.TupleDefinition}
+						'grantOrDeny'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						((#{Miosoft.TupleElement} 'grantOrDeny' (#{Miosoft.ElementPathSource} 2 1 (#grantOrDeny)) nil nil #string ()))
+						(
+							(#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 10 1) 1)
+							(#{Miosoft.MaxFilter} (1) (#{Miosoft.ElementSource} 10 1) false)
+							(#{Miosoft.ArbitraryFilter} (2))))
+					(
+						#{Miosoft.TupleDefinition}
+						'kindOfFeature'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						((#{Miosoft.TupleElement} 'kindOfFeature' (#{Miosoft.ElementPathSource} 2 1 (#kindOfFeature)) nil nil #string ()))
+						(
+							(#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 11 1) 1)
+							(#{Miosoft.MaxFilter} (1) (#{Miosoft.ElementSource} 11 1) false)
+							(#{Miosoft.ArbitraryFilter} (2))))
+					(
+						#{Miosoft.TupleDefinition}
+						'predicate'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						((#{Miosoft.TupleElement} 'predicate' (#{Miosoft.ElementPathSource} 2 1 (#predicate)) nil nil 'MiosoftWebSecurity.AccessPredicate' ()))
+						((#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 12 1) 1) (#{Miosoft.ArbitraryFilter} (1))))
+					(
+						#{Miosoft.TupleDefinition}
+						'priority'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						((#{Miosoft.TupleElement} 'priority' (#{Miosoft.ElementPathSource} 2 1 (#priority)) nil nil #integer ()))
+						(
+							(#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 13 1) 1)
+							(#{Miosoft.MaxFilter} (1) (#{Miosoft.ElementSource} 13 1) false)
+							(#{Miosoft.ArbitraryFilter} (2))))
+					(
+						#{Miosoft.TupleDefinition}
+						'timestamp'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						((#{Miosoft.TupleElement} 'timestamp' (#{Miosoft.ElementPathSource} 2 1 (#timestamp)) nil nil #timestamp ()))
+						(
+							(#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 14 1) 1)
+							(#{Miosoft.MaxFilter} (1) (#{Miosoft.ElementSource} 14 1) false)
+							(#{Miosoft.ArbitraryFilter} (2))))
+					(
+						#{Miosoft.TupleDefinition}
+						'ruleName'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						((#{Miosoft.TupleElement} 'ruleName' (#{Miosoft.ElementPathSource} 2 1 (#ruleName)) nil nil #string ()))
+						(
+							(#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 15 1) 1)
+							(#{Miosoft.MaxFilter} (1) (#{Miosoft.ElementSource} 15 1) false)
+							(#{Miosoft.ArbitraryFilter} (2)))))))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.MergeRule}
+				(
+					(
+						#{Miosoft.TupleDefinition}
+						'User Fragments'
+						(#{Miosoft.PlainTuplePolicy} false false true)
+						()
+						((#{Miosoft.TupleElement} 'user' (#{Miosoft.InitialInputSource}) nil nil 'MiosoftWebSecurity.User' ()))
+						())
+					(
+						#{Miosoft.TupleDefinition}
+						'select MiosoftWebSecurity.User fragments'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(1)
+						(
+							(#{Miosoft.TupleElement} 'MiosoftWebSecurity.User' (#{Miosoft.ElementSource} 1 1) nil nil 'MiosoftWebSecurity.User' ())
+							(#{Miosoft.TupleElement} 'timestamp' (#{Miosoft.ElementPathSource} 1 1 (#timestamp)) nil nil #timestamp ())
+							(#{Miosoft.TupleElement} 'fragmentPurpose' (#{Miosoft.ElementPathSource} 1 1 (#fragmentPurpose)) nil nil #string ())
+							(#{Miosoft.TupleElement} 'empty string' (#{Miosoft.ConstantSource} '') nil nil #string ())
+							(#{Miosoft.TupleElement} 'null timestamp' (#{Miosoft.ConstantSource} '') nil nil #timestamp ()))
+						(
+							(#{Miosoft.ComparisonFilter} () (#{Miosoft.ElementSource} 2 3) (#{Miosoft.EqualMatchComparison}) (#{Miosoft.ElementSource} 2 4))
+							(#{Miosoft.MaxFilter} (1) (#{Miosoft.ElementSource} 2 2) true)
+							(#{Miosoft.ArbitraryFilter} (2))))
+					(
+						#{Miosoft.TupleDefinition}
+						'new MiosoftWebSecurity.User'
+						(#{Miosoft.PlainTuplePolicy} false true false)
+						(4 5 8 6 10 7)
+						(
+							(
+								#{Miosoft.TupleElement}
+								'new MiosoftWebSecurity.User'
+								(#{Miosoft.NewInstanceSource})
+								nil
+								nil
+								'MiosoftWebSecurity.User'
+								(
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #loginName 'MiosoftWebSecurity.User')) (#{Miosoft.ElementSource} 4 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #timestamp 'MiosoftWebSecurity.User')) (#{Miosoft.ElementSource} 5 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #active 'MiosoftWebSecurity.User')) (#{Miosoft.ElementSource} 6 2))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #previousPassword 'MiosoftWebSecurity.User')) (#{Miosoft.ElementSource} 8 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaSourceRolePathComponent 'user_UserRole_Role' 'MiosoftWebSecurity.User')) (#{Miosoft.ElementSource} 10 1))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #lastPasswordChange 'MiosoftWebSecurity.User')) (#{Miosoft.ElementSource} 7 2))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #password 'MiosoftWebSecurity.User')) (#{Miosoft.ElementSource} 7 1)))))
+						())
+					(
+						#{Miosoft.TupleDefinition}
+						'loginName'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						((#{Miosoft.TupleElement} 'loginName' (#{Miosoft.ElementPathSource} 2 1 (#loginName)) nil nil #string ()))
+						(
+							(#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 4 1) 1)
+							(#{Miosoft.MaxFilter} (1) (#{Miosoft.ElementSource} 4 1) false)
+							(#{Miosoft.ArbitraryFilter} (2))))
+					(
+						#{Miosoft.TupleDefinition}
+						'timestamp'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(1)
+						((#{Miosoft.TupleElement} 'timestamp' (#{Miosoft.ElementPathSource} 1 1 (#timestamp)) nil nil #timestamp ()))
+						(
+							(#{Miosoft.NullFilter} () (#{Miosoft.ElementSource} 5 1) 1)
+							(#{Miosoft.MaxFilter} (1) (#{Miosoft.ElementSource} 5 1) false)
+							(#{Miosoft.ArbitraryFilter} (2))))
+					(
+						#{Miosoft.TupleDefinition}
+						'latest active state'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(1)
+						(
+							(#{Miosoft.TupleElement} 'timestamp' (#{Miosoft.ElementPathSource} 1 1 (#timestamp)) nil nil #timestamp ())
+							(#{Miosoft.TupleElement} 'active' (#{Miosoft.ElementPathSource} 1 1 (#active)) nil nil #bool ())
+							(#{Miosoft.TupleElement} 'fragmentPurpose' (#{Miosoft.ElementPathSource} 1 1 (#fragmentPurpose)) nil nil #string ())
+							(#{Miosoft.TupleElement} 'string "activation change"' (#{Miosoft.ConstantSource} 'activation change') nil nil #string ())
+							(#{Miosoft.TupleElement} 'empty string' (#{Miosoft.ConstantSource} '') nil nil #string ()))
+						(
+							(#{Miosoft.ComparisonFilter} () (#{Miosoft.ElementSource} 6 3) (#{Miosoft.EqualMatchComparison}) (#{Miosoft.ElementSource} 6 4))
+							(#{Miosoft.ComparisonFilter} () (#{Miosoft.ElementSource} 6 3) (#{Miosoft.EqualMatchComparison}) (#{Miosoft.ElementSource} 6 5))
+							(#{Miosoft.MaxFilter} (1 2) (#{Miosoft.ElementSource} 6 1) true)
+							(#{Miosoft.ArbitraryFilter} (3))))
+					(
+						#{Miosoft.TupleDefinition}
+						'latest password change'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(1)
+						(
+							(#{Miosoft.TupleElement} 'password' (#{Miosoft.ElementPathSource} 1 1 (#password)) nil nil #string ())
+							(#{Miosoft.TupleElement} 'lastPasswordChange' (#{Miosoft.ElementPathSource} 1 1 (#lastPasswordChange)) nil nil #timestamp ())
+							(#{Miosoft.TupleElement} 'fragmentPurpose' (#{Miosoft.ElementPathSource} 1 1 (#fragmentPurpose)) nil nil #string ())
+							(#{Miosoft.TupleElement} 'string "password change"' (#{Miosoft.ConstantSource} 'password change') nil nil #string ())
+							(#{Miosoft.TupleElement} 'user' (#{Miosoft.ElementSource} 1 1) nil nil 'MiosoftWebSecurity.User' ())
+							(#{Miosoft.TupleElement} 'empty string' (#{Miosoft.ConstantSource} '') nil nil #string ())
+							(#{Miosoft.TupleElement} 'timestamp' (#{Miosoft.ElementPathSource} 1 1 (#timestamp)) nil nil #timestamp ()))
+						(
+							(#{Miosoft.ComparisonFilter} () (#{Miosoft.ElementSource} 7 3) (#{Miosoft.EqualMatchComparison}) (#{Miosoft.ElementSource} 7 4))
+							(#{Miosoft.ComparisonFilter} () (#{Miosoft.ElementSource} 7 3) (#{Miosoft.EqualMatchComparison}) (#{Miosoft.ElementSource} 7 6))
+							(#{Miosoft.NullFilter} (1) (#{Miosoft.ElementSource} 7 1) 1)
+							(#{Miosoft.ArbitraryFilter} (5))
+							(#{Miosoft.MaxFilter} (3 6) (#{Miosoft.ElementSource} 7 7) false)
+							(#{Miosoft.NullFilter} (2) (#{Miosoft.ElementSource} 7 1) 1)))
+					(
+						#{Miosoft.TupleDefinition}
+						'previous passwords'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(7)
+						((#{Miosoft.TupleElement} 'previousPassword' (#{Miosoft.ElementPathSource} 7 5 (#previousPassword)) nil nil #string ()))
+						())
+					(
+						#{Miosoft.TupleDefinition}
+						'Extract Role Relationships'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(2)
+						(
+							(
+								#{Miosoft.TupleElement}
+								'AccessRole'
+								(#{Miosoft.NewInstanceSource})
+								nil
+								nil
+								'MiosoftWebSecurity.AccessRole'
+								(
+									(
+										#{Miosoft.InstanceUpdater}
+										((#SchemaAttributePathComponent #roleName 'MiosoftWebSecurity.AccessRole'))
+										(#{Miosoft.ElementPathSource} 2 1 (#webRoleKey)))
+									(#{Miosoft.InstanceUpdater} ((#SchemaAttributePathComponent #timestamp 'MiosoftWebSecurity.AccessRole')) (#{Miosoft.ElementSource} 2 5)))))
+						())
+					(
+						#{Miosoft.TupleDefinition}
+						'Build Role Relationships'
+						(#{Miosoft.PlainTuplePolicy} false false false)
+						(9)
+						(
+							(
+								#{Miosoft.TupleElement}
+								'user'
+								(#{Miosoft.NewRelationshipSource} (nil))
+								nil
+								nil
+								('MiosoftWebSecurity.User' 'user' 'UserRole')
+								((#{Miosoft.InstanceUpdater} ((#SchemaTargetRolePathComponent 'user_UserRole_role')) (#{Miosoft.ElementSource} 9 1)))))
+						())))))
+
+	"Index Presentations" 
+		(
+		(
+			'MiosoftWebSecurity.AccessRole'
+			'byName'
+			(
+				#{Miosoft.PresentationSpec}
+				''
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						''
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						(
+							#{Miosoft.PresentationHyperlinkToOid}
+							('[--> the MiosoftWebSecurity.AccessRole]')
+							''
+							false
+							false
+							''
+							false
+							()
+							nil
+							false
+							false
+							false
+							nil
+							0
+							nil
+							nil
+							nil
+							nil)
+						''
+						0
+						nil
+						nil
+						nil)
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Role name'
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('roleName')
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									2
+									nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			'byKeyword'
+			(
+				#{Miosoft.PresentationSpec}
+				''
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						''
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						(
+							#{Miosoft.PresentationHyperlinkToOid}
+							('[--> the MiosoftWebSecurity.AccessRule]')
+							''
+							false
+							false
+							''
+							false
+							()
+							nil
+							false
+							false
+							false
+							nil
+							0
+							nil
+							nil
+							nil
+							nil)
+						''
+						0
+						nil
+						nil
+						nil)
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Grant/Deny'
+									(#{Graphics.Rectangle} 5 4 6 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('grantOrDeny')
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									2
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Create'
+									(#{Graphics.Rectangle} 7 4 8 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('affectsCreation')
+											nil
+											''
+											1
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									3
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Read'
+									(#{Graphics.Rectangle} 8 4 9 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('affectsRead')
+											nil
+											''
+											1
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									4
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Update'
+									(#{Graphics.Rectangle} 9 4 10 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('affectsUpdate')
+											nil
+											''
+											1
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									5
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Delete'
+									(#{Graphics.Rectangle} 10 4 11 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('affectsDeletion')
+											nil
+											''
+											1
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									6
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Description'
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('description')
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									7
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Priority'
+									(#{Graphics.Rectangle} 6 4 7 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('priority')
+											nil
+											''
+											1
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									8
+									nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.User'
+			'login'
+			(
+				#{Miosoft.PresentationSpec}
+				''
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						''
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						(#{Miosoft.PresentationHyperlinkToOid} ('[--> the MiosoftWebSecurity.User]') '' false false '' false () nil false false false nil 0 nil nil nil nil)
+						''
+						0
+						nil
+						nil
+						nil)
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Login name'
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('loginName')
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									2
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Active'
+									(#{Graphics.Rectangle} 5 4 6 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('active')
+											nil
+											''
+											1
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									3
+									nil)))
+						1)))))
+
+	"Class Presentations" 
+		(
+		(
+			'MiosoftWebSecurity.AccessPredicate'
+			(
+				#{Miosoft.PresentationSpec}
+				''
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						''
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						nil
+						nil)
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#expression)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain 50 1)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									2
+									nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.PresentationSpec}
+				''
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						'Role'
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 2 2 2 2 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						nil
+						'interiorSection')
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Name'
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 2 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 5 4 6 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#roleName)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									3
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Users'
+									(#{Graphics.Rectangle} 4 6 6 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(((#{Miosoft.PresentationMapping} ('role_UserRole_Role') nil '' 4 nil nil nil nil nil nil #listHead nil nil)) nil 4 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Rules'
+									(#{Graphics.Rectangle} 4 5 6 6)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(((#{Miosoft.PresentationMapping} ('userRole_Permission_Role') nil '' 4 nil nil nil nil nil nil #listHead nil nil)) nil 5 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Edit role'
+									(#{Graphics.Rectangle} 4 7 5 8)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									(#{Miosoft.PresentationHyperlinkToOid} (#fragmentForEditing) 'editRole' true true '' false () nil false false true nil 32789 nil nil nil nil)
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 6 nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.PresentationSpec}
+				'editRole'
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						'Role'
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 2 2 2 2 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						nil
+						'borderSection')
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Name'
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 2 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 5 4 6 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#roleName)
+											nil
+											''
+											1
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									3
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Select rules'
+									(#{Graphics.Rectangle} 4 5 6 6)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('webRule_selectableCandidates' #ruleName)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForRadioButtonColumns} 1 nil true)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									4
+									nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.PresentationSpec}
+				'listRole'
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						''
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						nil
+						'interiorSection')
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Edit role'
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									(#{Miosoft.PresentationHyperlinkToOid} (#fragmentForEditing) 'editRole' true true 'viewUser' false () nil false false true nil 32789 nil nil nil nil)
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 2 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Role'
+									(#{Graphics.Rectangle} 5 4 6 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(((#{Miosoft.PresentationMapping} (#pickString) nil '' 1 nil nil nil nil nil nil #listHead nil nil)) nil 3 nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.PresentationSpec}
+				'newRole'
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						'Role'
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 2 2 2 2 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						nil
+						'borderSection')
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Name'
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 2 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 5 4 6 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#roleName)
+											nil
+											''
+											2
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									3
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Select rules'
+									(#{Graphics.Rectangle} 4 5 6 6)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('webRule_selectableCandidates' #ruleName)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForRadioButtonColumns} 1 nil true)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									4
+									nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			(
+				#{Miosoft.PresentationSpec}
+				'viewUser'
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						''
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						nil
+						nil)
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									''
+									nil)
+								(((#{Miosoft.PresentationMapping} (#user) nil 'allRoles' 25 nil nil nil nil nil nil #listHead nil nil)) nil 2 nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.PresentationSpec}
+				''
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						'Access Rule'
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 2 2 2 2 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						nil
+						'interiorSection')
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Grant / Deny'
+									(#{Graphics.Rectangle} 4 6 5 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#grantOrDeny)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									2
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Predicate'
+									(#{Graphics.Rectangle} 4 5 8 6)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#predicate)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									3
+									nil))
+							(
+								#{Miosoft.CompositePresentationSection}
+								(
+									'Access'
+									(#{Graphics.Rectangle} 4 7 8 8)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												''
+												(#{Graphics.Rectangle} 6 3 7 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												((#{Miosoft.PresentationMapping} (#affectsDeletion) nil '' 1 (#{Miosoft.PresentationModeForCheckBox} 'Delete') nil nil nil nil nil #listHead nil nil))
+												nil
+												5
+												nil))
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												''
+												(#{Graphics.Rectangle} 5 3 6 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												((#{Miosoft.PresentationMapping} (#affectsUpdate) nil '' 1 (#{Miosoft.PresentationModeForCheckBox} 'Update') nil nil nil nil nil #listHead nil nil))
+												nil
+												6
+												nil))
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												''
+												(#{Graphics.Rectangle} 4 3 5 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												((#{Miosoft.PresentationMapping} (#affectsRead) nil '' 1 (#{Miosoft.PresentationModeForCheckBox} 'Read') nil nil nil nil nil #listHead nil nil))
+												nil
+												7
+												nil))
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												''
+												(#{Graphics.Rectangle} 3 3 4 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												((#{Miosoft.PresentationMapping} (#affectsCreation) nil '' 1 (#{Miosoft.PresentationModeForCheckBox} 'Create') nil nil nil nil nil #listHead nil nil))
+												nil
+												8
+												nil)))
+									4))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Feature Name'
+									(#{Graphics.Rectangle} 7 6 8 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#featureName)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									9
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'User Roles'
+									(#{Graphics.Rectangle} 4 8 8 9)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(((#{Miosoft.PresentationMapping} ('accessRule_Permission_Role') nil '' 4 nil nil nil nil nil nil #listHead nil nil)) nil 10 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Feature Kind'
+									(#{Graphics.Rectangle} 6 6 7 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#kindOfFeature)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									11
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Priority'
+									(#{Graphics.Rectangle} 5 6 6 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#priority)
+											nil
+											''
+											1
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									12
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Edit rule'
+									(#{Graphics.Rectangle} 4 9 5 10)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									(#{Miosoft.PresentationHyperlinkToOid} (#fragmentForEditing) 'editRule' true true '' false () nil false false true nil 32789 nil nil nil nil)
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 13 nil))
+							(
+								#{Miosoft.CompositePresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 4 4 8 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												'Name'
+												(#{Graphics.Rectangle} 3 3 4 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(((#{Miosoft.PresentationMapping} (#ruleName) nil '' 0 nil nil nil nil nil nil #listHead nil nil)) nil 15 nil))
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												'Description'
+												(#{Graphics.Rectangle} 4 3 5 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												(
+													(
+														#{Miosoft.PresentationMapping}
+														(#description)
+														nil
+														''
+														0
+														(#{Miosoft.PresentationModeForTextField} nil nil nil #plain 50 1)
+														nil
+														nil
+														nil
+														nil
+														nil
+														#listHead
+														nil
+														nil))
+												nil
+												16
+												nil)))
+									14)))
+						1))))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.PresentationSpec}
+				'editRule'
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						'Access Rule'
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 2 2 2 2 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						nil
+						'interiorSection')
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Grant / Deny'
+									(#{Graphics.Rectangle} 4 6 5 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									((#{Miosoft.PresentationMapping} (#grantOrDeny) nil '' 0 (#{Miosoft.PresentationModeForDropDownList} nil true) nil nil nil nil nil #listHead nil nil))
+									nil
+									2
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Predicate'
+									(#{Graphics.Rectangle} 4 5 8 6)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#predicate)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									3
+									nil))
+							(
+								#{Miosoft.CompositePresentationSection}
+								(
+									'Access'
+									(#{Graphics.Rectangle} 4 7 8 8)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												''
+												(#{Graphics.Rectangle} 6 3 7 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												((#{Miosoft.PresentationMapping} (#affectsDeletion) nil '' 0 (#{Miosoft.PresentationModeForCheckBox} 'Delete') nil nil nil nil nil #listHead nil nil))
+												nil
+												5
+												nil))
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												''
+												(#{Graphics.Rectangle} 5 3 6 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												((#{Miosoft.PresentationMapping} (#affectsUpdate) nil '' 0 (#{Miosoft.PresentationModeForCheckBox} 'Update') nil nil nil nil nil #listHead nil nil))
+												nil
+												6
+												nil))
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												''
+												(#{Graphics.Rectangle} 4 3 5 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												((#{Miosoft.PresentationMapping} (#affectsRead) nil '' 0 (#{Miosoft.PresentationModeForCheckBox} 'Read') nil nil nil nil nil #listHead nil nil))
+												nil
+												7
+												nil))
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												''
+												(#{Graphics.Rectangle} 3 3 4 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												((#{Miosoft.PresentationMapping} (#affectsCreation) nil '' 0 (#{Miosoft.PresentationModeForCheckBox} 'Create') nil nil nil nil nil #listHead nil nil))
+												nil
+												8
+												nil)))
+									4))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Feature Name'
+									(#{Graphics.Rectangle} 7 6 8 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#featureName)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									9
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Feature Kind'
+									(#{Graphics.Rectangle} 6 6 7 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(#{Miosoft.PresentationMapping} (#kindOfFeature) nil '' 0 (#{Miosoft.PresentationModeForDropDownList} nil true) nil nil nil nil nil #listHead nil nil))
+									nil
+									10
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Priority'
+									(#{Graphics.Rectangle} 5 6 6 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#priority)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									11
+									nil))
+							(
+								#{Miosoft.CompositePresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 4 4 8 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												'Name'
+												(#{Graphics.Rectangle} 3 3 4 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												(
+													(
+														#{Miosoft.PresentationMapping}
+														(#ruleName)
+														nil
+														''
+														1
+														(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+														nil
+														nil
+														nil
+														nil
+														nil
+														#listHead
+														nil
+														nil))
+												nil
+												13
+												nil))
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												'Description'
+												(#{Graphics.Rectangle} 4 3 5 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												(
+													(
+														#{Miosoft.PresentationMapping}
+														(#description)
+														nil
+														''
+														0
+														(#{Miosoft.PresentationModeForTextField} nil nil nil #plain 50 1)
+														nil
+														nil
+														nil
+														nil
+														nil
+														#listHead
+														nil
+														nil))
+												nil
+												14
+												nil)))
+									12)))
+						1))))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.PresentationSpec}
+				'listRule'
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						''
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						nil
+						'interiorSection')
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Edit rule'
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									(#{Miosoft.PresentationHyperlinkToOid} (#fragmentForEditing) 'editRule' true true 'viewUser' false () nil false false true nil 32789 nil nil nil nil)
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 2 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 6 4 7 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									'interiorSection')
+								(((#{Miosoft.PresentationMapping} (#pickString) nil '' 1 nil nil nil nil nil nil #listHead nil nil)) nil 3 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Rule'
+									(#{Graphics.Rectangle} 5 4 6 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(((#{Miosoft.PresentationMapping} (#ruleName) nil '' 0 nil nil nil nil nil nil #listHead nil nil)) nil 4 nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.PresentationSpec}
+				'newRule'
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						'Access Rule'
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						nil
+						'interiorSection')
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Grant / Deny'
+									(#{Graphics.Rectangle} 4 6 5 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									((#{Miosoft.PresentationMapping} (#grantOrDeny) nil '' 0 (#{Miosoft.PresentationModeForDropDownList} nil true) nil nil nil nil nil #listHead nil nil))
+									nil
+									2
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Predicate'
+									(#{Graphics.Rectangle} 4 5 8 6)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#predicate)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									3
+									nil))
+							(
+								#{Miosoft.CompositePresentationSection}
+								(
+									'Access'
+									(#{Graphics.Rectangle} 4 7 8 8)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												''
+												(#{Graphics.Rectangle} 6 3 7 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												((#{Miosoft.PresentationMapping} (#affectsDeletion) nil '' 0 (#{Miosoft.PresentationModeForCheckBox} 'Delete') nil nil nil nil nil #listHead nil nil))
+												nil
+												5
+												nil))
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												''
+												(#{Graphics.Rectangle} 5 3 6 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												((#{Miosoft.PresentationMapping} (#affectsUpdate) nil '' 0 (#{Miosoft.PresentationModeForCheckBox} 'Update') nil nil nil nil nil #listHead nil nil))
+												nil
+												6
+												nil))
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												''
+												(#{Graphics.Rectangle} 4 3 5 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												((#{Miosoft.PresentationMapping} (#affectsRead) nil '' 0 (#{Miosoft.PresentationModeForCheckBox} 'Read') nil nil nil nil nil #listHead nil nil))
+												nil
+												7
+												nil))
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												''
+												(#{Graphics.Rectangle} 3 3 4 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												((#{Miosoft.PresentationMapping} (#affectsCreation) nil '' 0 (#{Miosoft.PresentationModeForCheckBox} 'Create') nil nil nil nil nil #listHead nil nil))
+												nil
+												8
+												nil)))
+									4))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Feature Name'
+									(#{Graphics.Rectangle} 7 6 8 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#featureName)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									9
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Feature Kind'
+									(#{Graphics.Rectangle} 6 6 7 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(#{Miosoft.PresentationMapping} (#kindOfFeature) nil '' 0 (#{Miosoft.PresentationModeForDropDownList} nil true) nil nil nil nil nil #listHead nil nil))
+									nil
+									10
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Priority'
+									(#{Graphics.Rectangle} 5 6 6 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#priority)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									11
+									nil))
+							(
+								#{Miosoft.CompositePresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 4 4 8 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												'Name'
+												(#{Graphics.Rectangle} 3 3 4 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												(
+													(
+														#{Miosoft.PresentationMapping}
+														(#ruleName)
+														nil
+														''
+														2
+														(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+														nil
+														nil
+														nil
+														nil
+														nil
+														#listHead
+														nil
+														nil))
+												nil
+												13
+												nil))
+										(
+											#{Miosoft.LeafPresentationSection}
+											(
+												'Description'
+												(#{Graphics.Rectangle} 4 3 5 4)
+												(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+												nil
+												''
+												0
+												nil
+												nil
+												nil)
+											(
+												(
+													(
+														#{Miosoft.PresentationMapping}
+														(#description)
+														nil
+														''
+														0
+														(#{Miosoft.PresentationModeForTextField} nil nil nil #plain 50 1)
+														nil
+														nil
+														nil
+														nil
+														nil
+														#listHead
+														nil
+														nil))
+												nil
+												14
+												nil)))
+									12)))
+						1))))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			(
+				#{Miosoft.PresentationSpec}
+				'viewUser'
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						''
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						nil
+						nil)
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									''
+									nil)
+								(((#{Miosoft.PresentationMapping} (#user) nil 'allRules' 25 nil nil nil nil nil nil #listHead nil nil)) nil 2 nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.PresentationSpec}
+				''
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						'User'
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 2 2 2 2 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						nil
+						'interiorSection')
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 5 4 6 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#loginName)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									2
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Password'
+									(#{Graphics.Rectangle} 8 4 9 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 3 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'User name'
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 4 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 9 4 10 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#password)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #password nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									5
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Active'
+									(#{Graphics.Rectangle} 6 4 7 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 6 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 7 4 8 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(((#{Miosoft.PresentationMapping} (#active) nil '' 1 (#{Miosoft.PresentationModeForCheckBox} ' ') nil nil nil nil nil #listHead nil nil)) nil 7 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Edit user'
+									(#{Graphics.Rectangle} 4 6 5 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									(#{Miosoft.PresentationHyperlinkToOid} (#fragmentForEditing) 'editUser' true true '' false () nil false false true nil 32789 nil nil nil nil)
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 8 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Roles'
+									(#{Graphics.Rectangle} 4 5 10 6)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(#{Miosoft.PresentationMapping} ('user_UserRole_Role') nil '' 28 nil nil nil nil nil nil #listHead nil nil)
+										(
+											#{Miosoft.PresentationMapping}
+											(#incompleteRoleMessage)
+											nil
+											''
+											1
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									9
+									nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.PresentationSpec}
+				'allRoles'
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						''
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						''
+						nil)
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 4 7 5 8)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 2 2 2 2 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									'borderSection')
+								(((#{Miosoft.PresentationMapping} (#role) nil 'listRole' 1 nil nil nil nil nil nil #listHead nil nil)) nil 2 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Add new role'
+									(#{Graphics.Rectangle} 4 5 5 6)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									(#{Miosoft.PresentationHyperlinkToOid} (#fragmentForNewRole) 'newRole' true true 'viewUser' false () nil false false true nil 32789 nil nil nil nil)
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 3 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'&nbsp;'
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 4 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'&nbsp;'
+									(#{Graphics.Rectangle} 4 6 5 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 5 nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.PresentationSpec}
+				'allRules'
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						''
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						''
+						nil)
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 4 7 5 8)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 2 2 2 2 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									'borderSection')
+								(((#{Miosoft.PresentationMapping} (#rule) nil 'listRule' 1 nil nil nil nil nil nil #listHead nil nil)) nil 2 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Add new rule'
+									(#{Graphics.Rectangle} 4 5 5 6)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									(#{Miosoft.PresentationHyperlinkToOid} (#fragmentForNewRule) 'newRule' true true 'viewUser' false () nil false false true nil 32789 nil nil nil nil)
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 3 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'&nbsp;'
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 4 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'&nbsp;'
+									(#{Graphics.Rectangle} 4 6 5 7)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 5 nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.PresentationSpec}
+				'editUser'
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						'User'
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 2 2 2 2 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						nil
+						'interiorSection')
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 5 4 6 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#loginName)
+											nil
+											''
+											1
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									2
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'User name'
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 3 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Active'
+									(#{Graphics.Rectangle} 6 4 7 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 4 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 7 4 8 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(((#{Miosoft.PresentationMapping} (#active) nil '' 0 (#{Miosoft.PresentationModeForCheckBox} ' ') nil nil nil nil nil #listHead nil nil)) nil 5 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Reset password'
+									(#{Graphics.Rectangle} 8 4 9 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									(#{Miosoft.PresentationHyperlinkToOid} () 'editUser' true true 'editUser' false (#resetPassword) nil false true false nil 37 nil nil nil nil)
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 6 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Select roles'
+									(#{Graphics.Rectangle} 4 5 8 6)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('webRole_selectableCandidates' #roleName)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForRadioButtonColumns} 1 nil true)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									7
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 8 5 9 6)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(((#{Miosoft.PresentationMapping} (#webMessage) nil '' 1 nil nil nil nil nil nil #listHead nil nil)) nil 8 nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.User'
+			(
+				#{Miosoft.PresentationSpec}
+				'newUser'
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						'User'
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 2 2 2 2 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						nil
+						''
+						0
+						nil
+						nil
+						'interiorSection')
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 5 4 6 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											(#loginName)
+											nil
+											''
+											2
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									2
+									nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'User name'
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 3 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Active'
+									(#{Graphics.Rectangle} 6 4 7 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(() nil 4 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 7 4 8 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(((#{Miosoft.PresentationMapping} (#active) nil '' 0 (#{Miosoft.PresentationModeForCheckBox} ' ') nil nil nil nil nil #listHead nil nil)) nil 5 nil))
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									'Select roles'
+									(#{Graphics.Rectangle} 4 5 8 6)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('webRole_selectableCandidates' #roleName)
+											nil
+											''
+											0
+											(#{Miosoft.PresentationModeForRadioButtonColumns} 1 nil true)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									6
+									nil)))
+						1)))))
+
+	"Role Presentations" 
+		(
+		(
+			'MiosoftWebSecurity.AccessRole'
+			'role_UserRole'
+			(
+				#{Miosoft.PresentationSpec}
+				''
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						''
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						(#{Miosoft.PresentationHyperlinkToOid} ('[--> user]') '' false false '' false () nil false false false nil 0 nil nil nil nil)
+						''
+						0
+						nil
+						nil
+						nil)
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('role_UserRole_user_loginName')
+											nil
+											''
+											1
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									2
+									nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.AccessRole'
+			'userRole_Permission'
+			(
+				#{Miosoft.PresentationSpec}
+				''
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						''
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						(#{Miosoft.PresentationHyperlinkToOid} ('[--> accessRule]') '' false false '' false () nil false false false nil 0 nil nil nil nil)
+						''
+						0
+						nil
+						nil
+						nil)
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('userRole_Permission_accessRule_description')
+											nil
+											''
+											1
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									2
+									nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.AccessRule'
+			'accessRule_Permission'
+			(
+				#{Miosoft.PresentationSpec}
+				''
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						''
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						(#{Miosoft.PresentationHyperlinkToOid} ('[--> userRole]') '' false false '' false () nil false false false nil 0 nil nil nil nil)
+						''
+						0
+						nil
+						nil
+						nil)
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('accessRule_Permission_userRole_roleName')
+											nil
+											''
+											1
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									2
+									nil)))
+						1))))
+		(
+			'MiosoftWebSecurity.User'
+			'user_UserRole'
+			(
+				#{Miosoft.PresentationSpec}
+				''
+				(
+					#{Miosoft.CompositePresentationSection}
+					(
+						''
+						(#{Graphics.Rectangle} 0 0 0 0)
+						(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+						(#{Miosoft.PresentationHyperlinkToOid} ('[--> role]') '' false false '' false () nil false false false nil 0 nil nil nil nil)
+						''
+						0
+						nil
+						nil
+						nil)
+					(
+						(
+							(
+								#{Miosoft.LeafPresentationSection}
+								(
+									''
+									(#{Graphics.Rectangle} 4 4 5 5)
+									(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+									nil
+									''
+									0
+									nil
+									nil
+									nil)
+								(
+									(
+										(
+											#{Miosoft.PresentationMapping}
+											('user_UserRole_role_roleName')
+											nil
+											''
+											1
+											(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+											nil
+											nil
+											nil
+											nil
+											nil
+											#listHead
+											nil
+											nil))
+									nil
+									2
+									nil)))
+						1)))))
+
+	"Applications" 
+		(
+		(
+			#{Miosoft.MioApplication}
+			'Security'
+			(
+				(
+					#{Miosoft.MioApplicationClass}
+					'Users'
+					'MiosoftWebSecurity.User'
+					(
+						#{Miosoft.PresentationSpec}
+						''
+						(
+							#{Miosoft.CompositePresentationSection}
+							(
+								''
+								(#{Graphics.Rectangle} 0 0 0 0)
+								(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+								nil
+								''
+								0
+								nil
+								nil
+								nil)
+							(
+								(
+									(
+										#{Miosoft.LeafPresentationSection}
+										(
+											''
+											(#{Graphics.Rectangle} 5 4 6 5)
+											(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+											nil
+											''
+											0
+											nil
+											nil
+											nil)
+										(
+											(
+												(
+													#{Miosoft.PresentationMapping}
+													('login' 'loginName')
+													nil
+													''
+													0
+													(#{Miosoft.PresentationModeForTextField} nil nil nil #plain nil nil)
+													nil
+													nil
+													nil
+													nil
+													nil
+													#listHead
+													nil
+													nil))
+											nil
+											2
+											nil))
+									(
+										#{Miosoft.LeafPresentationSection}
+										(
+											'User name'
+											(#{Graphics.Rectangle} 4 4 5 5)
+											(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+											nil
+											''
+											0
+											nil
+											nil
+											nil)
+										(() nil 3 nil))
+									(
+										#{Miosoft.LeafPresentationSection}
+										(
+											'Add new user'
+											(#{Graphics.Rectangle} 4 5 5 6)
+											(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+											(
+												#{Miosoft.PresentationHyperlinkToOid}
+												('New_MiosoftWebSecurity.User' #fragmentForNewUser)
+												'newUser'
+												true
+												true
+												''
+												false
+												()
+												nil
+												false
+												false
+												false
+												nil
+												5
+												nil
+												nil
+												nil
+												nil)
+											''
+											0
+											nil
+											nil
+											nil)
+										(() nil 4 nil)))
+								1)))
+					false
+					nil
+					#SearchResultDetail
+					nil
+					false
+					nil
+					nil
+					(#{Miosoft.PresentationResultsSpec} nil () 0 'groups' nil nil)
+					nil
+					nil
+					nil
+					nil
+					nil
+					nil
+					nil
+					nil)
+				(
+					#{Miosoft.MioApplicationClass}
+					'Roles'
+					'MiosoftWebSecurity.User'
+					(
+						#{Miosoft.PresentationSpec}
+						''
+						(
+							#{Miosoft.CompositePresentationSection}
+							(
+								''
+								(#{Graphics.Rectangle} 0 0 0 0)
+								(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+								nil
+								''
+								0
+								nil
+								nil
+								nil)
+							(() 1)))
+					false
+					nil
+					#Detail
+					(
+						#{Miosoft.AutoQueryPresentationLink}
+						'(MiosoftWebSecurity.User_login scanPredicate: ''loginName= "'',
+Miosoft.MioconWebSession loggedInUser,''"'') any'
+						false
+						'allRoles'
+						''
+						nil
+						nil)
+					false
+					nil
+					nil
+					(#{Miosoft.PresentationResultsSpec} nil () 0 'groups' nil nil)
+					nil
+					nil
+					nil
+					nil
+					nil
+					nil
+					nil
+					nil)
+				(
+					#{Miosoft.MioApplicationClass}
+					'Rules'
+					'MiosoftWebSecurity.User'
+					(
+						#{Miosoft.PresentationSpec}
+						''
+						(
+							#{Miosoft.CompositePresentationSection}
+							(
+								''
+								(#{Graphics.Rectangle} 0 0 0 0)
+								(#{Miosoft.PresentationSectionStyle} (#{Miosoft.PresentationAlignment} #full #left) 0 0 0 0 2 2 2 2 nil nil nil nil nil 0 -1 -1 false)
+								nil
+								''
+								0
+								nil
+								nil
+								nil)
+							(() 1)))
+					false
+					nil
+					#Detail
+					(
+						#{Miosoft.AutoQueryPresentationLink}
+						'(MiosoftWebSecurity.User_login scanPredicate: ''loginName= "'',
+Miosoft.MioconWebSession loggedInUser,''"'') any'
+						false
+						'allRules'
+						''
+						nil
+						nil)
+					false
+					nil
+					nil
+					(#{Miosoft.PresentationResultsSpec} nil () 0 'groups' nil nil)
+					nil
+					nil
+					nil
+					nil
+					nil
+					nil
+					nil
+					nil))
+			(
+				(#AllowMultipleLogins 'FALSE')
+				(#DisplayWebDebugStack 'FALSE')
+				(#'Log-HeaderFields' 'X-Forwarded-For,User-Agent')
+				(#LogFailures 'TRUE')
+				(#LogLoginFailedAttempts 'TRUE')
+				(#LogLogins 'TRUE')
+				(#LogReads 'TRUE')
+				(#LogSearches 'TRUE')
+				(#LogSecurityErrors 'TRUE')
+				(#LogWrites 'TRUE')
+				(#TimeoutInSeconds '300')
+				(#Title 'User Administration')
+				(#TitleLogo 'public/lock.png')
+				(#TitleLogoAlternative 'Security logo')
+				(#TitleText 'User Administration'))
+			false
+			(
+				(#{Miosoft.WebStyle} 'borderSection' ((#margin '4') (#padding '4')) () nil nil nil nil nil nil nil nil)
+				(#{Miosoft.WebStyle} 'interiorSection' ((#margin '2') (#padding '2')) () nil nil nil nil nil nil nil nil))
+			()
+			nil
+			nil
+			nil))
+
+	"Languages" 
+		'English=EN/Deutsche=DE'
+
+	"Locale" 
+		#ENU
+
+	"Calendar Specifications" 
+		((#{Miosoft.PresentationCalendarProperties} ((#name 'Default'))))
+
+	"Holiday styles" 
+		()
+
+	"Class functions" 
+		()
+
+	"Web styles" 
+		()
+
+	"Web services" 
+		()
+
+	"Compatibility mode" 
+		false
+) decodeAsLiteralArray

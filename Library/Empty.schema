@@ -1,0 +1,33 @@
+"Schema definition file"
+
+#(
+	#{Miosoft.Schema}
+	"Last saved:"  3198312958000  "= May 8, 2002 12:15:58.000"
+
+	"Classes:"  ()
+
+	"Class inheritance:"  ()
+
+	"Attributes:"  ()
+
+	"Class Indices:"  ()
+
+	"Root classes:"  ()
+
+	"Relationships:"  ()
+
+	"Match Rules:"  ()
+
+	"Merge Rules:"  ()
+
+	"Index Presentations:"  ()
+
+	"Class Presentations:"  ()
+
+	"Role Presentations:"  ()
+
+	"Applications:"  ()
+
+	"Languages:"  
+	'English=EN/Deutsche=DE'
+) decodeAsLiteralArray

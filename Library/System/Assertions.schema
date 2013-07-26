@@ -1,0 +1,214 @@
+"Schema definition file 2.0"
+
+#(
+	#{Miosoft.Schema}
+	"Last saved:"  3506598923440  "= February 13, 2012 15:15:23.440"
+
+	"Classes" 
+		((#{Miosoft.SchemaClass} 'System.AssertionFailure' true false '' -1 5) (#{Miosoft.SchemaClass} 'System.AssertionFailureParameter' false false '' -1 0))
+
+	"Class inheritance" 
+		(('System.AssertionFailure' nil) ('System.AssertionFailureParameter' nil))
+
+	"Attributes" 
+		(
+		(
+			'System.AssertionFailure'
+			(
+				#{Miosoft.SchemaAttribute}
+				#dataSource
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} 'self privateDataSourceName')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'System.AssertionFailure'
+			(
+				#{Miosoft.SchemaAttribute}
+				#expression
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'System.AssertionFailure'
+			(
+				#{Miosoft.SchemaAttribute}
+				#name
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'System.AssertionFailure'
+			(
+				#{Miosoft.SchemaAttribute}
+				#parameter
+				'System.AssertionFailureParameter'
+				2
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'System.AssertionFailure'
+			(
+				#{Miosoft.SchemaAttribute}
+				#recordKey
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				(#{Miosoft.Formula} 'self privateRecordKeyString')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'System.AssertionFailureParameter'
+			(
+				#{Miosoft.SchemaAttribute}
+				#key
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'System.AssertionFailureParameter'
+			(
+				#{Miosoft.SchemaAttribute}
+				#value
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false)))
+
+	"Class Indices" 
+		()
+
+	"Root classes" 
+		('System.AssertionFailure')
+
+	"Relationships" 
+		()
+
+	"Match Rules" 
+		()
+
+	"Merge Rules" 
+		()
+
+	"Index Presentations" 
+		()
+
+	"Class Presentations" 
+		()
+
+	"Role Presentations" 
+		()
+
+	"Applications" 
+		()
+
+	"Languages" 
+		'English=EN/Deutsche=DE'
+
+	"Locale" 
+		#ENU
+
+	"Calendar Specifications" 
+		((#{Miosoft.PresentationCalendarProperties} ((#name 'Default'))))
+
+	"Holiday styles" 
+		()
+
+	"Class functions" 
+		()
+
+	"Web styles" 
+		()
+) decodeAsLiteralArray

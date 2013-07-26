@@ -1,0 +1,33 @@
+<!doctype html>
+<html ng-app="todo">
+  <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-resource.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
+    <script src="js/todo.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="css/todo.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="hero-unit">
+      <h2>MioEdge Todos</h2>
+      <div ng-controller="TodoCtrl">
+        <p><span>{{remaining()}} of {{total()}} remaining</span>
+        [ <a href="" ng-click="archive()">archive</a> ]</p>
+        <ul class="unstyled" ui-sortable="sortableOptions" ng-model="todos">
+          <li class="{{todo.state}}" ng-repeat="todo in todos | filter: {archived: 'false'}">
+            <input id="todo-{{todo.id}}" type="checkbox" ng-model="todo.done" ng-change="change(todo)" ng-disabled="disabled(todo)">
+            <label for="todo-{{todo.id}}" class="done-{{todo.done}}">{{todo.text}}</label>
+          </li>
+        </ul>
+        <form ng-submit="addTodo()">
+          <input type="text" ng-model="todoText"  size="30"
+                 placeholder="add new todo here">
+          <input class="btn-primary" type="submit" value="add">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

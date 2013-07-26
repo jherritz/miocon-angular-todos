@@ -1,0 +1,2 @@
+Administrator,Everything Allowed
+Limited,User stuff Allowed

@@ -1,0 +1,222 @@
+"Schema definition file 2.0"
+
+#(
+	#{Miosoft.Schema}
+	"Last saved:"  3506598782490  "= February 13, 2012 15:13:02.490"
+
+	"Classes" 
+		((#{Miosoft.SchemaClass} 'System.UniqueCounterOffset' false false '' -1 0) (#{Miosoft.SchemaClass} 'System.UniqueCounterSet' true false '' -1 5))
+
+	"Class inheritance" 
+		(('System.UniqueCounterOffset' nil) ('System.UniqueCounterSet' nil))
+
+	"Attributes" 
+		(
+		(
+			'System.UniqueCounterOffset'
+			(
+				#{Miosoft.SchemaAttribute}
+				#lookup
+				(#{Miosoft.SmalltalkInteger})
+				1
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'| request theOffset qc |
+request := Miosoft.IndexConverterRequest new
+	templateIndexEntry:
+		(UniqueCounterSet_allCounters new
+			counter_name: self name).
+qc := MioDb.ActiveDatabase currentForReading
+	ifNil: [Miosoft.AbstractParticipantProcess current
+		ifNil: [Miosoft.TemporaryProcess new
+			queryClient: Miosoft.MioconWebPortalExecutor current queryClient]].
+(qc lookupCache at: request) do: [:entry |
+	theOffset isNil assert: ''More than one unique counter offset exists with the name: '', self name.
+	theOffset := entry counter_offset].
+^theOffset ifNil: [0]')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'System.UniqueCounterOffset'
+			(
+				#{Miosoft.SchemaAttribute}
+				#name
+				(#{Miosoft.SmalltalkString})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'System.UniqueCounterOffset'
+			(
+				#{Miosoft.SchemaAttribute}
+				#offset
+				(#{Miosoft.SmalltalkInteger})
+				1
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'System.UniqueCounterSet'
+			(
+				#{Miosoft.SchemaAttribute}
+				#computeLatestMaxima
+				'System.UniqueCounterSet'
+				1
+				false
+				''
+				''
+				''
+				''
+				(
+					#{Miosoft.Formula}
+					'| qc max counterSet countersToUpdate |
+qc := MioDb.ActiveDatabase currentForReading sortingQueryClient.
+max := GoodDictionary new.
+countersToUpdate := GoodDictionary new.
+
+self counters do: [:aCounter |
+	countersToUpdate at: aCounter name put: aCounter copy].
+
+(1 to: qc channels size) do: [:i |
+	| summary d |
+	summary := qc processSimpleRequest: (MioDb.SummaryRequest new hostIndex: i).
+	summary := summary cluster entries.
+	d := summary instVarAt: (summary class allInstVarNames indexOf: ''uniqueCounters'').
+	d notNil ifTrue: [
+		d keysAndValuesDo: [:k : v |
+			max at: k put: ((max at: k ifAbsent: [0]) max: v)]]].
+counterSet := System.UniqueCounterSet new.
+max keysAndValuesDo: [:k :v |
+	(countersToUpdate includesKey: k)
+		ifTrue: [
+			| counter |
+			counter := countersToUpdate at: k.
+			counter offset: counter offset + v]
+		ifFalse: [
+			| counter |
+			counter := System.UniqueCounterOffset new.
+			counter name: k.
+			counter offset: v.
+			countersToUpdate at: k put: counter]].
+countersToUpdate do: [:c |
+	counterSet addCounter: c].
+counterSet
+')
+				(#{Miosoft.ComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false))
+		(
+			'System.UniqueCounterSet'
+			(
+				#{Miosoft.SchemaAttribute}
+				#counter
+				'System.UniqueCounterOffset'
+				2
+				false
+				''
+				''
+				''
+				''
+				nil
+				(#{Miosoft.NotComputedComputationPolicy})
+				''
+				nil
+				nil
+				nil
+				true
+				false
+				false
+				false)))
+
+	"Class Indices" 
+		(
+		(
+			'System.UniqueCounterSet'
+			#objectIndex
+			(#{Miosoft.ParallelIndex} 'allCounters' 0 ((#counter #name) (#counter #offset)) ((#counter #name)) () 'ignored')))
+
+	"Root classes" 
+		('System.UniqueCounterSet')
+
+	"Relationships" 
+		()
+
+	"Match Rules" 
+		()
+
+	"Merge Rules" 
+		()
+
+	"Index Presentations" 
+		()
+
+	"Class Presentations" 
+		()
+
+	"Role Presentations" 
+		()
+
+	"Applications" 
+		()
+
+	"Languages" 
+		'English=EN/Deutsche=DE'
+
+	"Locale" 
+		#ENU
+
+	"Calendar Specifications" 
+		((#{Miosoft.PresentationCalendarProperties} ((#name 'Default'))))
+
+	"Holiday styles" 
+		()
+
+	"Class functions" 
+		()
+
+	"Web styles" 
+		()
+) decodeAsLiteralArray
