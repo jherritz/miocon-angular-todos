@@ -1,24 +1,26 @@
 <!doctype html>
 <html ng-app="signIn">
   <head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-resource.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
+    <title>Sign in</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-resource.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
 	<script src="js/miosoft.js"></script>
     <script src="js/sign-in.js"></script>
-    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/sign-in.css" rel="stylesheet">
   </head>
   <body>
-    <div ng-controller="AuthenticationCtrl" class="hero-unit">
+    <div ng-controller="AuthenticationCtrl" class="jumbotron">
       <h2>Sign in</h2>
       <div>
-        <form ng-submit="signIn()">
-          <input type="email" ng-model="user.username" placeholder="email@example.com">
-		  <input type="password" ng-model="password">
-          <input class="btn-primary" type="submit" value="Sign in">
+        <form class="form-horizontal" ng-submit="signIn()">
+          <input type="email" class="form-control" ng-model="user.username" placeholder="Email">
+		  <input type="password" class="form-control" ng-model="password" placeholder="Password">
+          <input class="btn btn-primary" type="submit" value="Sign in">
         </form>
       </div>
     </div>

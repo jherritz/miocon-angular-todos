@@ -1,3 +1,6 @@
+#todo-input {
+    width: 80%;
+}
 .done-true {
     text-decoration: line-through;
     color: grey;
